@@ -6,8 +6,12 @@ import { setTokenCookie, storeUserData } from "../cookies";
 
 export const handleRegisterUser = async (data: RegisterFormData) => {
     try {
+        // confirmPassword is a client-side-only field; backend's CreateUserDTO
+        // only expects fullName, email, contactNumber, password, gender
+        const { confirmPassword, ...payload } = data;
+
         // how to handle data from component and how to send to component
-        const result = await register(data);
+        const result = await register(payload);
 
         if (result.success) {
             return { success: true, message: result.message, data: result.data };

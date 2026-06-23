@@ -147,62 +147,64 @@ export default function RegisterForm() {
               )}
             </div>
 
-            {/* First Name */}
+            {/* Full Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                First Name
+                Full Name
               </label>
 
               <input
                 type="text"
-                placeholder="Enter your first name"
-                {...register("firstName")}
+                placeholder="Enter your full name"
+                {...register("fullName")}
                 className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-5 py-4 text-gray-900 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition"
               />
 
-              {errors.firstName && (
+              {errors.fullName && (
                 <p className="mt-2 text-sm text-red-500">
-                  {errors.firstName.message}
+                  {errors.fullName.message}
                 </p>
               )}
             </div>
 
-            {/* Last Name */}
+            {/* Contact Number */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Last Name
+                Contact Number
               </label>
 
               <input
                 type="text"
-                placeholder="Enter your last name"
-                {...register("lastName")}
+                placeholder="Enter your contact number"
+                {...register("contactNumber")}
                 className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-5 py-4 text-gray-900 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition"
               />
 
-              {errors.lastName && (
+              {errors.contactNumber && (
                 <p className="mt-2 text-sm text-red-500">
-                  {errors.lastName.message}
+                  {errors.contactNumber.message}
                 </p>
               )}
             </div>
 
-            {/* Username */}
+            {/* Gender */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Username
+                Gender
               </label>
 
-              <input
-                type="text"
-                placeholder="Choose a username"
-                {...register("username")}
+              <select
+                {...register("gender")}
                 className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-5 py-4 text-gray-900 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition"
-              />
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
 
-              {errors.username && (
+              {errors.gender && (
                 <p className="mt-2 text-sm text-red-500">
-                  {errors.username.message}
+                  {errors.gender.message}
                 </p>
               )}
             </div>

@@ -1,6 +1,7 @@
 "use client"
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { clearAuthCookies, getTokenCookie, getUserData } from "../cookies";
+import { handleGetCurrentUser } from "../actions/user-action";
 import { useRouter } from "next/navigation";
 
 interface AuthContextProps {
@@ -22,11 +23,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [loading, setLoading] = useState(true);
     const router = useRouter();
     const checkAuth = async () => {
+        setLoading(true);
         try {
             const token = await getTokenCookie();
-            const user = await getUserData();
-            setUser(user);
-            setIsAuthenticated(!!token);
+            if (!token) {
+                setIsAuthenticated(false);
+                setUser(null);
+                return;
+            }
+            setIsAuthenticated(true);
+
+            // Try to get the freshest user details from the API (whoami)
+            const result = await handleGetCurrentUser();
+            if (result.success) {
+                setUser(result.data);
+            } else {
+                // fall back to cached cookie data, e.g. if offline
+                const cachedUser = await getUserData();
+                setUser(cachedUser);
+            }
         } catch (err) {
             setIsAuthenticated(false);
             setUser(null);
