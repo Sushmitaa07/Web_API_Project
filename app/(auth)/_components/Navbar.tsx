@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Bell, ChevronDown, User, LogOut } from "lucide-react";
+import { Search, Bell, ChevronDown, User, LogOut, ShieldCheck } from "lucide-react";
 import { useAuth } from "@/lib/contexts/AuthContext";
 
 const API_BASE_URL =
@@ -144,6 +144,16 @@ export default function Navbar() {
                                     <User size={16} />
                                     My Profile
                                 </Link>
+                                {user?.role === "admin" && (
+                                    <Link
+                                        href="/admin/users"
+                                        onClick={() => setOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm text-purple-600 hover:bg-purple-50"
+                                    >
+                                        <ShieldCheck size={16} />
+                                        Admin Panel
+                                    </Link>
+                                )}
                                 <button
                                     onClick={() => {
                                         setOpen(false);
