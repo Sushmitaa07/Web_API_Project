@@ -24,6 +24,14 @@ export async function getUserData() {
     return userDataCookie ? JSON.parse(userDataCookie) : null; // change string into object
 }
 
+export async function updateUserData(userData: any) {
+    const cookieStore = await cookies();
+    cookieStore.set({
+        name: "user_data",
+        value: JSON.stringify(userData),
+    });
+}
+
 export async function clearAuthCookies() {
     const cookieStore = await cookies();
     cookieStore.delete("auth_token");

@@ -10,6 +10,35 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  --animate-gradient-x: gradient-x 15s ease infinite;
+  --animate-float-slow: float-slow 6s ease-in-out infinite;
+  --animate-cyber-scan: cyber-scan 8s linear infinite;
+
+  @keyframes gradient-x {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(1deg);
+    }
+  }
+  @keyframes cyber-scan {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 0% 100%;
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +52,40 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
+
+/* Custom CSS Helpers for Realistic Themes */
+.bg-grid-pattern {
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px);
+}
+
+.bg-cyber-grid {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(139, 92, 246, 0.07) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(139, 92, 246, 0.07) 1px, transparent 1px);
+}
+
+.cyber-scanlines::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+.aurora-bg-mesh {
+  background-color: #0b071e;
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(219, 39, 119, 0.2) 0px, transparent 50%),
+    radial-gradient(at 90% 10%, rgba(79, 70, 229, 0.2) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(139, 92, 246, 0.2) 0px, transparent 50%),
+    radial-gradient(at 80% 90%, rgba(236, 72, 153, 0.15) 0px, transparent 50%);
+  background-size: 200% 200%;
+}
+
